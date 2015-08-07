@@ -6,11 +6,10 @@ describe TowersOfHanoi do
   describe "#render" do
 
     it "should render discs and empty towers" do
-      expect(game.render(game.towers[0][0])).to eq("XXX")
-      expect(game.render(game.towers[0][1])).to eq("XX")
-      expect(game.render(game.towers[0][2])).to eq("X")
-
-      expect(game.render(game.towers[1][0])).to eq(" ")
+      expect(game.render).to eq(
+        'Tower 0:  ' + game.towers[0].join('  ') + "\n" +
+        'Tower 1:  ' + game.towers[1].join('  ') + "\n" +
+        'Tower 2:  ' + game.towers[2].join('  ') + "\n")
     end
 
   end
@@ -45,5 +44,4 @@ describe TowersOfHanoi do
     end
 
   end
-
 end
