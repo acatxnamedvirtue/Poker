@@ -261,6 +261,32 @@ describe Hand do
         end
       end
 
+      describe "#straight_flush?" do
+        let(:hand) { Hand.new }
+
+        it "should return true if the hand has 4 cards of the same value" do
+          hand.cards = [
+            Card.new(:hearts, :ace),
+            Card.new(:hearts, :deuce),
+            Card.new(:hearts, :three),
+            Card.new(:hearts, :five),
+            Card.new(:hearts, :four)
+          ]
+          expect(hand.straight_flush?).to be true
+        end
+
+        it "should return false otherwise" do
+          hand.cards = [
+              Card.new(:hearts, :deuce),
+              Card.new(:spades, :four),
+              Card.new(:diamonds, :five),
+              Card.new(:clubs, :nine),
+              Card.new(:spades, :three)
+          ]
+          expect(hand.straight_flush?).to be false
+        end
+      end
+
     end
   end
 
