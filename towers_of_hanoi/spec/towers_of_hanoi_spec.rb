@@ -5,6 +5,14 @@ describe TowersOfHanoi do
 
   describe "#render" do
 
+    it "should render stuff" do
+      expect(game.render(game.towers[0][0])).to eq("XXX")
+      expect(game.render(game.towers[0][1])).to eq("XX")
+      expect(game.render(game.towers[0][2])).to eq("X")
+
+      expect(game.render(game.towers[1][0])).to eq(" ")
+    end
+
   end
 
   describe "#move" do
@@ -26,10 +34,15 @@ describe TowersOfHanoi do
   end
 
   describe "#won?" do
+    let(:finished_game) {TowersOfHanoi.new([[],[3,2,1],[]])}
 
-    it "should be true when a tower other than starting tower has all discs"
+    it "should be true when a tower other than starting tower has all discs" do
+      expect(finished_game.won?).to be true
+    end
 
-    it "should return false unless above condition"
+    it "should return false unless above condition" do
+      expect(game.won?).to be false
+    end
 
   end
 
