@@ -30,5 +30,6 @@ class Deck
   end
 
   def return(cards)
+    self.cards.concat(cards)
   end
 end
