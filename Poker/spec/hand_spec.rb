@@ -137,6 +137,52 @@ describe Hand do
         end
       end
 
+      describe "#straight?" do
+        let(:hand) { Hand.new }
+
+        it "should return true if the hand has 5 cards in a row" do
+          hand.cards = [
+            Card.new(:hearts, :deuce),
+            Card.new(:spades, :three),
+            Card.new(:diamonds, :four),
+            Card.new(:clubs, :six),
+            Card.new(:spades, :five)
+          ]
+          expect(hand.straight?).to be true
+        end
+
+        it "should treat ace as high and also low" do
+          hand.cards = [
+            Card.new(:hearts, :deuce),
+            Card.new(:spades, :three),
+            Card.new(:diamonds, :four),
+            Card.new(:clubs, :ace),
+            Card.new(:spades, :five)
+          ]
+          expect(hand.straight?).to be true
+
+          hand.cards = [
+            Card.new(:hearts, :ten),
+            Card.new(:spades, :queen),
+            Card.new(:diamonds, :jack),
+            Card.new(:clubs, :king),
+            Card.new(:spades, :ace)
+          ]
+          expect(hand.straight?).to be true
+        end
+
+        it "should return false otherwise" do
+          hand.cards = [
+              Card.new(:hearts, :deuce),
+              Card.new(:spades, :four),
+              Card.new(:diamonds, :five),
+              Card.new(:clubs, :nine),
+              Card.new(:spades, :three)
+          ]
+          expect(hand.straight?).to be false
+        end
+      end
+
       describe "#flush?" do
         let(:hand) { Hand.new }
 
