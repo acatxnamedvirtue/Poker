@@ -84,6 +84,33 @@ describe Hand do
         end
       end
 
+      describe "#two_pair?" do
+        let(:hand) { Hand.new }
+
+        it "should return true if the hand has a pair" do
+          hand.cards = [
+            Card.new(:hearts, :deuce),
+            Card.new(:spades, :deuce),
+            Card.new(:diamonds, :deuce),
+            Card.new(:clubs, :deuce),
+            Card.new(:spades, :three)
+          ]
+
+          expect(hand.two_pair?).to be true
+        end
+
+        it "should return false otherwise" do
+          hand.cards = [
+              Card.new(:hearts, :deuce),
+              Card.new(:spades, :four),
+              Card.new(:diamonds, :five),
+              Card.new(:clubs, :nine),
+              Card.new(:spades, :three)
+          ]
+          expect(hand.two_pair?).to be false
+        end
+      end
+
     end
   end
 

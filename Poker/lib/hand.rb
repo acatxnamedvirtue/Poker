@@ -54,19 +54,43 @@ class Hand
   end
 
   def two_pair?
-  end
+    temp_cards = cards.dup
 
-  def one_pair?
-    (0...cards.count).each do |idx|
-      (idx...cards.count).each do |idy|
-        return true if  cards[idx].value == cards[idy].value && idx != idy
+    pairs = []
+
+    pairs << find_pair(cards) unless find_pair(cards).empty?
+
+    pairs.each do |pair|
+      pair.each do |card|
+        temp_cards.delete(card)
       end
     end
 
-    false
+    pairs << find_pair(temp_cards) unless find_pair(temp_cards).empty?
+
+    pairs.count == 2
+  end
+
+  def one_pair?
+    pair = []
+    pair << find_pair(cards) unless find_pair(cards).empty?
+
+    pair.count == 1
   end
 
   def high_card?
     true
+  end
+
+  def find_pair(cards)
+    pair = []
+
+    (0...cards.count).each do |idx|
+      (idx...cards.count).each do |idy|
+        pair += [cards[idx],cards[idy]] if  cards[idx].value == cards[idy].value && idx != idy && pair.empty?
+      end
+    end
+
+    pair
   end
 end
