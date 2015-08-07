@@ -64,8 +64,8 @@ describe Hand do
           hand.cards = [
             Card.new(:hearts, :deuce),
             Card.new(:spades, :deuce),
-            Card.new(:diamonds, :deuce),
-            Card.new(:clubs, :deuce),
+            Card.new(:diamonds, :four),
+            Card.new(:clubs, :five),
             Card.new(:spades, :three)
           ]
 
@@ -91,8 +91,8 @@ describe Hand do
           hand.cards = [
             Card.new(:hearts, :deuce),
             Card.new(:spades, :deuce),
-            Card.new(:diamonds, :deuce),
-            Card.new(:clubs, :deuce),
+            Card.new(:diamonds, :three),
+            Card.new(:clubs, :four),
             Card.new(:spades, :three)
           ]
 
@@ -108,6 +108,110 @@ describe Hand do
               Card.new(:spades, :three)
           ]
           expect(hand.two_pair?).to be false
+        end
+      end
+
+      describe "#three_of_a_kind?" do
+        let(:hand) { Hand.new }
+
+        it "should return true if the hand has 3 cards of the same value" do
+          hand.cards = [
+            Card.new(:hearts, :deuce),
+            Card.new(:spades, :deuce),
+            Card.new(:diamonds, :deuce),
+            Card.new(:clubs, :three),
+            Card.new(:spades, :three)
+          ]
+          expect(hand.three_of_a_kind?).to be true
+        end
+
+        it "should return false otherwise" do
+          hand.cards = [
+              Card.new(:hearts, :deuce),
+              Card.new(:spades, :four),
+              Card.new(:diamonds, :five),
+              Card.new(:clubs, :nine),
+              Card.new(:spades, :three)
+          ]
+          expect(hand.three_of_a_kind?).to be false
+        end
+      end
+
+      describe "#flush?" do
+        let(:hand) { Hand.new }
+
+        it "should return true if the hand is all the same suit" do
+          hand.cards = [
+            Card.new(:hearts, :deuce),
+            Card.new(:hearts, :four),
+            Card.new(:hearts, :ten),
+            Card.new(:hearts, :king),
+            Card.new(:hearts, :three)
+          ]
+          expect(hand.flush?).to be true
+        end
+
+        it "should return false otherwise" do
+          hand.cards = [
+              Card.new(:hearts, :deuce),
+              Card.new(:spades, :four),
+              Card.new(:diamonds, :five),
+              Card.new(:clubs, :nine),
+              Card.new(:spades, :three)
+          ]
+          expect(hand.flush?).to be false
+        end
+      end
+
+      describe "#full_house?" do
+        let(:hand) { Hand.new }
+
+        it "should return true if the hand is all the same suit" do
+          hand.cards = [
+            Card.new(:hearts, :deuce),
+            Card.new(:spades, :deuce),
+            Card.new(:diamonds, :deuce),
+            Card.new(:hearts, :king),
+            Card.new(:diamonds, :king)
+          ]
+          expect(hand.full_house?).to be true
+        end
+
+        it "should return false otherwise" do
+          hand.cards = [
+              Card.new(:hearts, :deuce),
+              Card.new(:spades, :four),
+              Card.new(:diamonds, :five),
+              Card.new(:clubs, :nine),
+              Card.new(:spades, :three)
+          ]
+          expect(hand.full_house?).to be false
+        end
+      end
+
+      describe "#four_of_a_kind?" do
+        let(:hand) { Hand.new }
+
+        it "should return true if the hand has 4 cards of the same value" do
+          hand.cards = [
+            Card.new(:hearts, :deuce),
+            Card.new(:spades, :deuce),
+            Card.new(:diamonds, :deuce),
+            Card.new(:clubs, :deuce),
+            Card.new(:spades, :three)
+          ]
+          expect(hand.four_of_a_kind?).to be true
+        end
+
+        it "should return false otherwise" do
+          hand.cards = [
+              Card.new(:hearts, :deuce),
+              Card.new(:spades, :four),
+              Card.new(:diamonds, :five),
+              Card.new(:clubs, :nine),
+              Card.new(:spades, :three)
+          ]
+          expect(hand.four_of_a_kind?).to be false
         end
       end
 
