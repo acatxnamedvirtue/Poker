@@ -28,6 +28,16 @@ class Hand
     nil
   end
 
+  def beats?(other_hand)
+    if hand_score > other_hand.hand_score
+      true
+    elsif hand_score < other_hand.hand_score
+      false
+    else
+      
+    end
+  end
+
   def straight_flush?
     flush? && straight?
   end
@@ -99,5 +109,27 @@ class Hand
     end
 
     straights
+  end
+
+  def hand_score
+    if straight_flush?
+      9
+    elsif four_of_a_kind?
+      8
+    elsif full_house?
+      7
+    elsif flush?
+      6
+    elsif straight?
+      5
+    elsif three_of_a_kind?
+      4
+    elsif two_pair?
+      3
+    elsif one_pair?
+      2
+    else
+      1
+    end
   end
 end
