@@ -5,7 +5,7 @@ describe TowersOfHanoi do
 
   describe "#render" do
 
-    it "should render stuff" do
+    it "should render discs and empty towers" do
       expect(game.render(game.towers[0][0])).to eq("XXX")
       expect(game.render(game.towers[0][1])).to eq("XX")
       expect(game.render(game.towers[0][2])).to eq("X")
